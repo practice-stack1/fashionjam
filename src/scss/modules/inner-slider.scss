@@ -1,0 +1,14 @@
+.inner-slider{
+  &__container{
+  }
+  &__wrapper{
+    display: -webkit-box;
+    min-height: 100%;
+  }
+  &__slide{
+    flex: 0 1 100%;
+    min-height: 100vh;
+    min-width: 0;
+  }
+
+}

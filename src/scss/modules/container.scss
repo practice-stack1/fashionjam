@@ -1,0 +1,8 @@
+.container{
+  margin: 0 auto;
+  &_s{
+    margin: 0 auto;
+    padding: 0px 10px;
+    max-width: 560px;
+  }
+}
