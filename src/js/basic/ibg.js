@@ -11,3 +11,5 @@ function ibg(){
 }
 
 ibg();
+
+export default ibg;

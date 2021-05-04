@@ -1,4 +1,5 @@
 import './basic/ibg';
+import './modules/changeImage';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -123,19 +124,31 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 		for (let index = 0; index < mainSlider.slides.length; index++) {
 			const pageSlide = mainSlider.slides[index];
-			const pageSlideContent = pageSlide.querySelector('.main-screen__content-wrapper');
+			const pageSlideContent = pageSlide.querySelector('.wrapper-container');
 			if (pageSlideContent) {
+
+				const paddingTop = parseInt(getComputedStyle(pageSlideContent.parentElement, true).paddingTop);
+				const paddingBottom = parseInt(getComputedStyle(pageSlideContent.parentElement, true).paddingBottom);
 				const pageSlideContentHeight = pageSlideContent.offsetHeight;
-				console.log(pageSlideContentHeight, window.innerHeight);
-				if (pageSlideContentHeight + 162 > window.innerHeight) {
-					console.log(pageSlideContentHeight + 162 > window.innerHeight);
-					wrapper.classList.add('_free');
-					mainSlider.params.freeMode = true;
-					break;
+				const padding = paddingTop + paddingBottom;
+				if(document.body.clientWidth <= 1440){
+					if (pageSlideContentHeight + padding + 100 > window.innerHeight) {
+						wrapper.classList.add('_free');
+						mainSlider.params.freeMode = true;
+						break;
+					}
+				} else {
+					if (pageSlideContentHeight + padding > window.innerHeight) {
+						wrapper.classList.add('_free');
+						mainSlider.params.freeMode = true;
+						break;
+					}
 				}
+
 			}
 		}
 	}
+
 
 	mainSlider.init();
 

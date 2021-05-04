@@ -86,13 +86,48 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/basic/checkMobile.js":
+/*!*************************************!*\
+  !*** ./src/js/basic/checkMobile.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var isMobile = {
+  Android: function Android() {
+    return navigator.userAgent.match(/Android/i);
+  },
+  BlackBerry: function BlackBerry() {
+    return navigator.userAgent.match(/BlackBerry/i);
+  },
+  iOS: function iOS() {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function Opera() {
+    return navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function Windows() {
+    return navigator.userAgent.match(/IEMobile/i);
+  },
+  any: function any() {
+    return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (isMobile);
+
+/***/ }),
+
 /***/ "./src/js/basic/ibg.js":
 /*!*****************************!*\
   !*** ./src/js/basic/ibg.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 document.querySelector('.wrapper').classList.add('loaded');
 
 function ibg() {
@@ -105,6 +140,7 @@ function ibg() {
 }
 
 ibg();
+/* harmony default export */ __webpack_exports__["default"] = (ibg);
 
 /***/ }),
 
@@ -118,7 +154,8 @@ ibg();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./basic/ibg */ "./src/js/basic/ibg.js");
-/* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_basic_ibg__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_changeImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImage */ "./src/js/modules/changeImage.js");
+
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
@@ -207,17 +244,26 @@ window.addEventListener('DOMContentLoaded', function () {
 
     for (var index = 0; index < mainSlider.slides.length; index++) {
       var pageSlide = mainSlider.slides[index];
-      var pageSlideContent = pageSlide.querySelector('.main-screen__content-wrapper');
+      var pageSlideContent = pageSlide.querySelector('.wrapper-container');
 
       if (pageSlideContent) {
+        var paddingTop = parseInt(getComputedStyle(pageSlideContent.parentElement, true).paddingTop);
+        var paddingBottom = parseInt(getComputedStyle(pageSlideContent.parentElement, true).paddingBottom);
         var pageSlideContentHeight = pageSlideContent.offsetHeight;
-        console.log(pageSlideContentHeight, window.innerHeight);
+        var padding = paddingTop + paddingBottom;
 
-        if (pageSlideContentHeight + 162 > window.innerHeight) {
-          console.log(pageSlideContentHeight + 162 > window.innerHeight);
-          wrapper.classList.add('_free');
-          mainSlider.params.freeMode = true;
-          break;
+        if (document.body.clientWidth <= 1440) {
+          if (pageSlideContentHeight + padding + 100 > window.innerHeight) {
+            wrapper.classList.add('_free');
+            mainSlider.params.freeMode = true;
+            break;
+          }
+        } else {
+          if (pageSlideContentHeight + padding > window.innerHeight) {
+            wrapper.classList.add('_free');
+            mainSlider.params.freeMode = true;
+            break;
+          }
         }
       }
     }
@@ -225,6 +271,76 @@ window.addEventListener('DOMContentLoaded', function () {
 
   mainSlider.init();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/changeImage.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/changeImage.js ***!
+  \***************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _basic_checkMobile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../basic/checkMobile */ "./src/js/basic/checkMobile.js");
+/* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../basic/ibg */ "./src/js/basic/ibg.js");
+
+
+var imageContainers = document.querySelectorAll('.info-section__image-container');
+removeImageChildren(imageContainers);
+
+if (document.body.clientWidth >= 1440) {
+  imageContainers.forEach(function (imageContainer) {
+    imageContainer.classList.remove('is-mobile');
+  });
+} else {
+  imageContainers.forEach(function (imageContainer) {
+    imageContainer.classList.add('is-mobile');
+  });
+}
+
+window.addEventListener('resize', function () {
+  removeImageChildren(imageContainers);
+
+  if (document.body.clientWidth >= 1440) {
+    imageContainers.forEach(function (imageContainer) {
+      imageContainer.classList.remove('is-mobile');
+    });
+  } else {
+    imageContainers.forEach(function (imageContainer) {
+      imageContainer.classList.add('is-mobile');
+    });
+  }
+});
+
+function removeImageChildren(imageContainers) {
+  if (document.body.clientWidth <= 1440) {
+    imageContainers.forEach(function (imageContainer, i) {
+      while (imageContainer.firstChild) {
+        imageContainer.firstChild.remove();
+      }
+
+      imageContainer.appendChild(createImage(i));
+    });
+  }
+}
+
+function removeIsMobile(imageContainers) {
+  if (document.body.clientWidth >= 1440) {
+    imageContainers.forEach(function (imageContainer) {
+      imageContainer.classList.remove('is-mobile');
+    });
+  }
+}
+
+function createImage(i) {
+  var img = document.createElement('img');
+  img.getAttribute('alt', 'model');
+  img.classList.add('info-section__image');
+  img.setAttribute('src', "img/".concat(i + 1, ".png"));
+  return img;
+}
 
 /***/ })
 
