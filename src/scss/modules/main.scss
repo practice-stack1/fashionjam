@@ -1,7 +1,13 @@
 .main-screen{
   padding: 144px 30px 18px 30px;
-  display: flex;
-  align-items: center;
+  @media(min-width: 1920px){
+    display: flex;
+    align-items: center;
+  }
+  @media(min-height: 1080px){
+    display: flex;
+    align-items: center;
+  }
   @media(max-height: 450px){
     padding: 30px 18px;
   }

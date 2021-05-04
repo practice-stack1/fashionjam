@@ -54,7 +54,6 @@
     font-size: 11px;
     line-height: 18px;
     letter-spacing: 0.46px;
-    color: #fff;
     margin: 0 0 24px 0;
     flex-wrap: wrap;
     span{
@@ -62,6 +61,24 @@
       margin: 5px;
       text-align: center;
       cursor: pointer;
+      &:after{
+        display: flex;
+        content: '';
+        height: 1px;
+        width: 0%;
+        background-color: rgba(248, 248, 248, 1);
+        transition: all 0.5s ease;
+        margin: -3px auto 0 auto;
+      }
+      &:hover{
+        &:after{
+          width: 100%;
+        }
+      }
+    }
+    a{
+      text-decoration: none;
+      color: #fff;
     }
   }
   &__contacts{
