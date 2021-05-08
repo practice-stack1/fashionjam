@@ -299,9 +299,9 @@ h6 {
 .main-screen__arrows {
   position: absolute;
   top: 50%;
-  -webkit-transform: translate(0px, -50%);
-      -ms-transform: translate(0px, -50%);
-          transform: translate(0px, -50%);
+  -webkit-transform: translate(0%, -50%);
+      -ms-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -356,6 +356,20 @@ h6 {
   line-height: 78px;
   font-weight: 700;
   margin: 0 0 24px 0;
+  opacity: 0;
+  -webkit-transform: scale(1.5);
+      -ms-transform: scale(1.5);
+          transform: scale(1.5);
+  -webkit-transition: all 0.5s ease 0.3s;
+  -o-transition: all 0.5s ease 0.3s;
+  transition: all 0.5s ease 0.3s;
+}
+
+.main-screen__title._active {
+  opacity: 1;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
 }
 
 .main-screen__subtitle {
@@ -364,6 +378,37 @@ h6 {
   font-weight: 500;
   font-size: calc(12px + 2 * ((100vw - 320px) / 1600));
   margin: 0 0 60px 0;
+  -webkit-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+          transform: scale(1.2);
+  opacity: 0;
+  -webkit-transition: all 0.5s ease 0.8s;
+  -o-transition: all 0.5s ease 0.8s;
+  transition: all 0.5s ease 0.8s;
+}
+
+.main-screen__subtitle._active {
+  opacity: 1;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.main-screen__button-wrapper {
+  opacity: 0;
+  -webkit-transform: translateY(-40%);
+      -ms-transform: translateY(-40%);
+          transform: translateY(-40%);
+  -webkit-transition: all 0.5s ease 0.3s;
+  -o-transition: all 0.5s ease 0.3s;
+  transition: all 0.5s ease 0.3s;
+}
+
+.main-screen__button-wrapper._active {
+  opacity: 1;
+  -webkit-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+          transform: translateY(0%);
 }
 
 .main-screen__button {
@@ -379,6 +424,13 @@ h6 {
   line-height: 18px;
   text-transform: uppercase;
   cursor: pointer;
+  opacity: 0;
+  -webkit-transform: translateY(-30%);
+      -ms-transform: translateY(-30%);
+          transform: translateY(-30%);
+  -webkit-transition: all 0.5s ease 0.8s;
+  -o-transition: all 0.5s ease 0.8s;
+  transition: all 0.5s ease 0.8s;
 }
 
 .main-screen__sub-button span:after {
@@ -397,6 +449,13 @@ h6 {
 
 .main-screen__sub-button:hover span:after {
   width: 100%;
+}
+
+.main-screen__sub-button._active {
+  opacity: 1;
+  -webkit-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+          transform: translateY(0%);
 }
 
 .main-screen__article {

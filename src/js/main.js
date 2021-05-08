@@ -2,6 +2,7 @@ import './basic/ibg';
 import './modules/changeImage';
 import './basic/mouse-parallax';
 import mouse_parallax from './basic/mouse-parallax';
+import './basic/anim-sroll';
 
 
 window.addEventListener('DOMContentLoaded', () => {

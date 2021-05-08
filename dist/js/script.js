@@ -86,6 +86,59 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/basic/anim-sroll.js":
+/*!************************************!*\
+  !*** ./src/js/basic/anim-sroll.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var animItems = document.querySelectorAll('._anim-items'); //? діжурний клас для елементів із анімацією
+
+if (animItems.length > 0) {
+  //! у кожного елемента із класом _anim-items при досягненні скролом 1\4 його висоти чи висоти вікна браузера, якщо елемент більший за висоту вікна браузера йому добавляється клас .active, якщо ми не докрутили або перекрутили, то клас видаляється
+  var animOnScroll = function animOnScroll() {
+    for (var index = 0; index < animItems.length; index++) {
+      var animItem = animItems[index];
+      var animItemHeight = animItem.offsetHeight;
+      var animItemOffset = offset(animItem).top;
+      var animStart = 4; //! Змінна для визначення точки старту анімації
+
+      var animItemPoint = window.innerHeight - animItemHeight / animStart;
+
+      if (animItemHeight > window.innerHeight) {
+        animItemPoint = window.innerHeight - window.innerHeight / animStart;
+      }
+
+      if (pageYOffset > animItemOffset - animItemPoint && pageYOffset < animItemOffset + animItemHeight) {
+        animItem.classList.add('_active');
+      } else {
+        if (!animItem.classList.contains('_anim-no-hide')) {
+          //! клас призначений для заборони повторного виклику анімації
+          animItem.classList.remove('_active');
+        }
+      }
+    }
+  };
+
+  var offset = function offset(el) {
+    var rect = el.getBoundingClientRect(),
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return {
+      top: rect.top + scrollTop,
+      left: rect.left + scrollLeft
+    };
+  };
+
+  window.addEventListener('scroll', animOnScroll);
+  setTimeout(function () {
+    animOnScroll();
+  }, 300);
+}
+
+/***/ }),
+
 /***/ "./src/js/basic/checkMobile.js":
 /*!*************************************!*\
   !*** ./src/js/basic/checkMobile.js ***!
@@ -214,6 +267,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./basic/ibg */ "./src/js/basic/ibg.js");
 /* harmony import */ var _modules_changeImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImage */ "./src/js/modules/changeImage.js");
 /* harmony import */ var _basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basic/mouse-parallax */ "./src/js/basic/mouse-parallax.js");
+/* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basic/anim-sroll */ "./src/js/basic/anim-sroll.js");
+/* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
