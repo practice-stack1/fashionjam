@@ -1,5 +1,7 @@
 import './basic/ibg';
 import './modules/changeImage';
+import './basic/mouse-parallax';
+import mouse_parallax from './basic/mouse-parallax';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -153,5 +155,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	mainSlider.init();
 
 
+	mouse_parallax('.parallax-2', '.second-up', '.second-down');
+	mouse_parallax('.parallax-3', '.third-up', '.third-down');
+	mouse_parallax('.parallax-1', '.first-up', '.first-down');
 });
 

@@ -144,6 +144,64 @@ ibg();
 
 /***/ }),
 
+/***/ "./src/js/basic/mouse-parallax.js":
+/*!****************************************!*\
+  !*** ./src/js/basic/mouse-parallax.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+ // Ждем загрузку контента
+
+var mouse_parallax = function mouse_parallax(container, up, down) {
+  var parallax = document.querySelector(container);
+
+  if (parallax) {
+    var setMouseParallaxStyle = function setMouseParallaxStyle() {
+      var distX = coordXprocent - positionX;
+      var distY = coordYprocent - positionY;
+      positionX = positionX + distX * speed;
+      positionY = positionY + distY * speed;
+
+      if (img_up.classList.contains('second-up') || img_down.classList.contains('second-down')) {
+        img_up.style.cssText += "transform: translate(".concat(positionX / firstUp, "%,").concat(positionY / firstUp - 30, "%);");
+        img_down.style.cssText += "transform: translate(".concat(positionX / firstDown, "%,").concat(positionY / firstDown - 40, "%);");
+      } else {
+        img_up.style.cssText += "transform: translate(".concat(positionX / firstUp, "%,").concat(positionY / firstUp - 50, "%);");
+        img_down.style.cssText += "transform: translate(".concat(positionX / firstDown, "%,").concat(positionY / firstDown - 50, "%);");
+      }
+
+      window.requestAnimationFrame(setMouseParallaxStyle);
+    };
+
+    var img_up = document.querySelector(up);
+    var img_down = document.querySelector(down);
+    console.log(parallax, img_up, img_down);
+    var firstUp = 60;
+    var firstDown = 30;
+    var speed = 0.1;
+    var positionX = 0,
+        positionY = 0;
+    var coordXprocent = 0,
+        coordYprocent = 0;
+    setMouseParallaxStyle();
+    parallax.addEventListener("mousemove", function (e) {
+      var parallaxWidth = parallax.offsetWidth;
+      var parallaxHeight = parallax.offsetHeight;
+      var coordX = e.pageX - parallaxWidth / 2;
+      var coordY = e.pageY - parallaxHeight / 2;
+      coordXprocent = coordX / parallaxWidth * 100;
+      coordYprocent = coordY / parallaxHeight * 100;
+    });
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (mouse_parallax);
+
+/***/ }),
+
 /***/ "./src/js/main.js":
 /*!************************!*\
   !*** ./src/js/main.js ***!
@@ -155,6 +213,9 @@ ibg();
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./basic/ibg */ "./src/js/basic/ibg.js");
 /* harmony import */ var _modules_changeImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImage */ "./src/js/modules/changeImage.js");
+/* harmony import */ var _basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basic/mouse-parallax */ "./src/js/basic/mouse-parallax.js");
+
+
 
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -270,6 +331,9 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   mainSlider.init();
+  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-2', '.second-up', '.second-down');
+  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-3', '.third-up', '.third-down');
+  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-1', '.first-up', '.first-down');
 });
 
 /***/ }),
