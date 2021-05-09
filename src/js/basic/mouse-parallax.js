@@ -4,11 +4,12 @@
 	const mouse_parallax = (container, up, down) => {
 
 		const parallax = document.querySelector(container);
+		const img_up = document.querySelector(up);
+		const img_down = document.querySelector(down);
 
-		if (parallax) {
+		if (parallax && img_up && img_down) {
 
-			const img_up = document.querySelector(up);
-			const img_down = document.querySelector(down);
+
 
 			console.log(parallax, img_up, img_down);
 
@@ -32,7 +33,7 @@
 					img_down.style.cssText += `transform: translate(${positionX / firstDown}%,${(positionY / firstDown) - 40}%);`;
 				} else {
 					img_up.style.cssText += `transform: translate(${positionX / firstUp}%,${(positionY / firstUp) - 50}%);`;
-				img_down.style.cssText += `transform: translate(${positionX / firstDown}%,${(positionY / firstDown) - 50}%);`;
+					img_down.style.cssText += `transform: translate(${positionX / firstDown}%,${(positionY / firstDown) - 50}%);`;
 				}
 
 				window.requestAnimationFrame(setMouseParallaxStyle);

@@ -39,11 +39,11 @@
               <span>Social Network for the Fashion Industry Artists</span>
             </h2>
             <div class="main-screen__button-wrapper _anim-items _anim-no-hide">
-              <div class="button main-screen__button">
+              <div class="button main-screen__button main-btn">
                 <span>Get Started Now</span>
               </div>
             </div>
-            <div class="main-screen__sub-button bgd _anim-items _anim-no-hide">
+            <div class="main-screen__sub-button bgd _anim-items _anim-no-hide sub-button">
               <span>I Have an Account</span>
             </div>
           </div>
@@ -117,10 +117,10 @@
             <div class="last-screen__content-wrapper container_s wrapper-container"  data-swiper-parallax-y="-50%" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="800">
               <h2 class="last-screen__title title__bg title title_black">
                 <span>Find new opportunities</span> <br> <span>with Fashionjam</span></h2>
-              <div class="button last-screen__button button_big">
+              <div class="button last-screen__button button_big main-btn">
                 <span>Get Started Now</span>
               </div>
-              <div class="main-screen__sub-button bgd last-screen__sub-button">
+              <div class="main-screen__sub-button bgd last-screen__sub-button last-screen__sub-button_visible sub-button">
                 <span>I Have an Account</span>
               </div>
               <div class="last-screen__application">
@@ -157,6 +157,32 @@
 			<div class="page__scroll"></div>
     </main>
   </div>
+  <div class="overlay">
+    <div class="modal" id="preregister">
+      <div class="modal__subtitle">Preregister</div>
+      <form class="modal__forms" action="#">
+          <label for="name">First name:</label>
+          <input name="name" placeholder="Enter first name" type="text" id="name">
+          <label for="lastname">Last name: </label>
+          <input name="lastname" placeholder="Enter last name" id="lastname">
+          <label for="email">Email:</label>
+          <input name="email" placeholder="Enter email" type="email" id="email">
+          <button class="modal__button">complete</button>
+      </form>
+    </div>
+
+    <div class="modal" id="register">
+        <div class="modal__subtitle">Account</div>
+        <form class="modal__forms" action="#">
+            <label for="login">Login:</label>
+            <input name="login" placeholder="Enter first name" type="text" id="login">
+            <label for="password">Password: </label>
+            <input name="password" placeholder="Enter first name" type="text" id="password">
+            <button class="modal__button">Log in</button>
+        </form>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="js/script.js"></script>
 </body>

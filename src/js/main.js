@@ -3,6 +3,7 @@ import './modules/changeImage';
 import './basic/mouse-parallax';
 import mouse_parallax from './basic/mouse-parallax';
 import './basic/anim-sroll';
+import modal from './modules/modals';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -159,5 +160,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	mouse_parallax('.parallax-2', '.second-up', '.second-down');
 	mouse_parallax('.parallax-3', '.third-up', '.third-down');
 	mouse_parallax('.parallax-1', '.first-up', '.first-down');
+
+	modal('.main-btn', '.overlay', '#preregister');
+	modal('.sub-button', '.overlay', '#register');
 });
 

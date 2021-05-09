@@ -210,8 +210,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var mouse_parallax = function mouse_parallax(container, up, down) {
   var parallax = document.querySelector(container);
+  var img_up = document.querySelector(up);
+  var img_down = document.querySelector(down);
 
-  if (parallax) {
+  if (parallax && img_up && img_down) {
     var setMouseParallaxStyle = function setMouseParallaxStyle() {
       var distX = coordXprocent - positionX;
       var distY = coordYprocent - positionY;
@@ -229,8 +231,6 @@ var mouse_parallax = function mouse_parallax(container, up, down) {
       window.requestAnimationFrame(setMouseParallaxStyle);
     };
 
-    var img_up = document.querySelector(up);
-    var img_down = document.querySelector(down);
     console.log(parallax, img_up, img_down);
     var firstUp = 60;
     var firstDown = 30;
@@ -269,6 +269,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basic/mouse-parallax */ "./src/js/basic/mouse-parallax.js");
 /* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basic/anim-sroll */ "./src/js/basic/anim-sroll.js");
 /* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+
 
 
 
@@ -390,6 +392,8 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-2', '.second-up', '.second-down');
   Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-3', '.third-up', '.third-down');
   Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-1', '.first-up', '.first-down');
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])('.main-btn', '.overlay', '#preregister');
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])('.sub-button', '.overlay', '#register');
 });
 
 /***/ }),
@@ -461,6 +465,40 @@ function createImage(i) {
   img.setAttribute('src', "img/".concat(i + 1, ".png"));
   return img;
 }
+
+/***/ }),
+
+/***/ "./src/js/modules/modals.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/modals.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var modal = function modal(triggers, overlay, _modal) {
+  var button = document.querySelectorAll(triggers),
+      lay = document.querySelector(overlay),
+      modal_icon = document.querySelector(_modal);
+  button.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      lay.classList.add('active');
+      modal_icon.classList.add('active');
+    });
+  });
+  lay.addEventListener('click', function (e) {
+    console.log(e.target);
+
+    if (e.target.classList.contains('overlay')) {
+      modal_icon.classList.remove('active');
+      lay.classList.remove('active');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (modal);
 
 /***/ })
 
