@@ -161,33 +161,33 @@ function js() {
                 .on("end", browsersync.reload);
 }
 
-function js_project() {
-    return gulp.src(path.src.js)
-                .pipe(webpack({
-                    mode: 'production',
-                    output: {
-                        filename: 'script.js'
-                    },
-                    module: {
-                        rules: [
-                          {
-                            test: /\.m?js$/,
-                            exclude: /(node_modules|bower_components)/,
-                            use: {
-                              loader: 'babel-loader',
-                              options: {
-                                presets: [['@babel/preset-env', {
-                                    corejs: 3,
-                                    useBuiltIns: "usage"
-                                }]]
-                              }
-                            }
-                          }
-                        ]
-                      }
-                }))
-                .pipe(gulp.dest(path.build.js));
-}
+// function js_project() {
+//     return gulp.src(path.src.js)
+//                 .pipe(webpack({
+//                     mode: 'production',
+//                     output: {
+//                         filename: 'script.min.js'
+//                     },
+//                     module: {
+//                         rules: [
+//                           {
+//                             test: /\.m?js$/,
+//                             exclude: /(node_modules|bower_components)/,
+//                             use: {
+//                               loader: 'babel-loader',
+//                               options: {
+//                                 presets: [['@babel/preset-env', {
+//                                     corejs: 3,
+//                                     useBuiltIns: "usage"
+//                                 }]]
+//                               }
+//                             }
+//                           }
+//                         ]
+//                       }
+//                 }))
+//                 .pipe(gulp.dest(path.build.js));
+// }
 
 
 function images() {
@@ -211,7 +211,7 @@ function images() {
                 optimizationLevel: 3
             })))
         .pipe(dest(path.build.img))
-        .pipe(browsersync.reload({stream: true}))
+        .pipe(browsersync.reload({stream: true}));
 }
 
 gulp.task('clearCache', function() {
@@ -287,16 +287,15 @@ function clean(params) {
 
 
 let dev = gulp.series(clean, gulp.parallel(html, css, images, fonts, icons), js, fontsStyle);
-let project = gulp.series(clean, gulp.parallel(html_project, css_project, images, fonts, icons), js_project, fontsStyle);
+let project = gulp.series(clean, gulp.parallel(html_project, css_project, images, fonts, icons), js, fontsStyle);
 
 gulp.task('default', gulp.parallel(dev, watchFile, browserSync));
 gulp.task('prod', gulp.parallel(project, browserSync));
 
 
 exports.html_project = html_project;
-// exports.iconsFonts = iconsFonts;
 exports.css_project = css_project;
-exports.js_project = js_project;
+// exports.js_project = js_project;
 exports.icons = icons;
 exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
@@ -304,5 +303,4 @@ exports.images = images;
 exports.js = js;
 exports.css = css;
 exports.html = html;
-// exports.php_mailer = php_mailer;
-// exports.db = db;
+
