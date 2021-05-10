@@ -4,6 +4,8 @@ import './basic/mouse-parallax';
 import mouse_parallax from './basic/mouse-parallax';
 import './basic/anim-sroll';
 import modal from './modules/modals';
+import forms from './modules/forms';
+import checkTextInputs from './basic/checkTextInputs';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -163,5 +165,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	modal('.main-btn', '.overlay', '#preregister');
 	modal('.sub-button', '.overlay', '#register');
+
+	forms('.modal__forms');
+
+	checkTextInputs('[type="text"]');
 });
 

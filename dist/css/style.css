@@ -980,6 +980,10 @@ h6 {
   visibility: visible;
 }
 
+input._error {
+  border: 1px solid red;
+}
+
 @media (min-width: 1300px) {
   .overlay.active {
     width: 150%;

@@ -9,10 +9,6 @@
 
 		if (parallax && img_up && img_down) {
 
-
-
-			console.log(parallax, img_up, img_down);
-
 			const firstUp = 60;
 			const firstDown = 30;
 

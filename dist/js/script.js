@@ -172,6 +172,30 @@ var isMobile = {
 
 /***/ }),
 
+/***/ "./src/js/basic/checkTextInputs.js":
+/*!*****************************************!*\
+  !*** ./src/js/basic/checkTextInputs.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var checkTextInputs = function checkTextInputs(selector) {
+  var txtInputs = document.querySelectorAll(selector);
+  txtInputs.forEach(function (input) {
+    input.addEventListener('keypress', function (e) {
+      if (e.key.match(/[^A-zА-я]/ig)) {
+        e.preventDefault();
+      }
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (checkTextInputs);
+
+/***/ }),
+
 /***/ "./src/js/basic/ibg.js":
 /*!*****************************!*\
   !*** ./src/js/basic/ibg.js ***!
@@ -231,7 +255,6 @@ var mouse_parallax = function mouse_parallax(container, up, down) {
       window.requestAnimationFrame(setMouseParallaxStyle);
     };
 
-    console.log(parallax, img_up, img_down);
     var firstUp = 60;
     var firstDown = 30;
     var speed = 0.1;
@@ -270,6 +293,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basic/anim-sroll */ "./src/js/basic/anim-sroll.js");
 /* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _basic_checkTextInputs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./basic/checkTextInputs */ "./src/js/basic/checkTextInputs.js");
+
+
 
 
 
@@ -394,6 +421,8 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-1', '.first-up', '.first-down');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])('.main-btn', '.overlay', '#preregister');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])('.sub-button', '.overlay', '#register');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_5__["default"])('.modal__forms');
+  Object(_basic_checkTextInputs__WEBPACK_IMPORTED_MODULE_6__["default"])('[type="text"]');
 });
 
 /***/ }),
@@ -468,6 +497,86 @@ function createImage(i) {
 
 /***/ }),
 
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_regulars_check_email__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/regulars/check-email */ "./src/js/modules/regulars/check-email.js");
+
+
+var forms = function forms(current_form) {
+  var forms = document.querySelectorAll(current_form),
+      inputs = document.querySelectorAll('input');
+  forms.forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      sendForm(this);
+    });
+  });
+
+  function sendForm(form) {
+    var error = formValidate(form);
+
+    if (error === 0) {
+      clearInputs(inputs);
+      inputs.forEach(function (input) {
+        formRemoveError(input);
+      });
+    }
+  }
+
+  function formValidate(form) {
+    var error = 0;
+    var formReq = form.querySelectorAll('._req');
+
+    for (var index = 0; index < formReq.length; index++) {
+      var input = formReq[index];
+      formRemoveError(input);
+
+      if (input.getAttribute("name") === "email") {
+        console.log('check email', Object(_modules_regulars_check_email__WEBPACK_IMPORTED_MODULE_0__["default"])(input));
+
+        if (!Object(_modules_regulars_check_email__WEBPACK_IMPORTED_MODULE_0__["default"])(input)) {
+          formAddError(input);
+          error++;
+        }
+      } else {
+        if (input.value === '') {
+          formAddError(input);
+          error++;
+        }
+      }
+    }
+
+    return error;
+  }
+
+  function formAddError(input) {
+    input.parentElement.classList.add('_error');
+    input.classList.add('_error');
+  }
+
+  function formRemoveError(input) {
+    input.parentElement.classList.remove('_error');
+    input.classList.remove('_error');
+  }
+
+  var clearInputs = function clearInputs(inputs) {
+    inputs.forEach(function (input) {
+      input.value = '';
+    });
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (forms);
+
+/***/ }),
+
 /***/ "./src/js/modules/modals.js":
 /*!**********************************!*\
   !*** ./src/js/modules/modals.js ***!
@@ -489,16 +598,39 @@ var modal = function modal(triggers, overlay, _modal) {
     });
   });
   lay.addEventListener('click', function (e) {
-    console.log(e.target);
-
     if (e.target.classList.contains('overlay')) {
       modal_icon.classList.remove('active');
       lay.classList.remove('active');
+      var inputs = lay.querySelectorAll('input');
+      inputs.forEach(function (input) {
+        input.classList.remove('_error');
+      });
     }
   });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modal);
+
+/***/ }),
+
+/***/ "./src/js/modules/regulars/check-email.js":
+/*!************************************************!*\
+  !*** ./src/js/modules/regulars/check-email.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function email_test(input) {
+  if (input.value !== '') {
+    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input.value);
+  } else {
+    return false;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (email_test);
 
 /***/ })
 

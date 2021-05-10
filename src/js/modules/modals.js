@@ -12,10 +12,13 @@ const modal = (triggers, overlay, modal) => {
     });
 
     lay.addEventListener('click', (e) => {
-      console.log(e.target);
       if(e.target.classList.contains('overlay')){
         modal_icon.classList.remove('active');
         lay.classList.remove('active');
+        const inputs = lay.querySelectorAll('input');
+        inputs.forEach(input => {
+          input.classList.remove('_error');
+        });
       }
     });
 }

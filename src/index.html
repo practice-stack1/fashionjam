@@ -162,12 +162,12 @@
       <div class="modal__subtitle">Preregister</div>
       <form class="modal__forms" action="#">
           <label for="name">First name:</label>
-          <input name="name" placeholder="Enter first name" type="text" id="name">
+          <input class="_req" name="name" placeholder="Enter first name" type="text" id="name">
           <label for="lastname">Last name: </label>
-          <input name="lastname" placeholder="Enter last name" id="lastname">
+          <input class="_req" name="lastname" placeholder="Enter last name" type="text" id="lastname">
           <label for="email">Email:</label>
-          <input name="email" placeholder="Enter email" type="email" id="email">
-          <button class="modal__button">complete</button>
+          <input class="_req" name="email" placeholder="Enter email" type="text" id="email">
+          <button type="submit" class="modal__button">complete</button>
       </form>
     </div>
 
@@ -175,10 +175,10 @@
         <div class="modal__subtitle">Account</div>
         <form class="modal__forms" action="#">
             <label for="login">Login:</label>
-            <input name="login" placeholder="Enter first name" type="text" id="login">
+            <input class="_req" name="login" placeholder="Enter first name" type="text" id="login">
             <label for="password">Password: </label>
-            <input name="password" placeholder="Enter first name" type="text" id="password">
-            <button class="modal__button">Log in</button>
+            <input class="_req" name="password" placeholder="Enter first name" type="password" id="password">
+            <button type="submit" class="modal__button">Log in</button>
         </form>
     </div>
   </div>
