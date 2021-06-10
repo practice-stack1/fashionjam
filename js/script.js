@@ -93,17 +93,15 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var animItems = document.querySelectorAll('._anim-items'); //? діжурний клас для елементів із анімацією
+var animItems = document.querySelectorAll('._anim-items');
 
 if (animItems.length > 0) {
-  //! у кожного елемента із класом _anim-items при досягненні скролом 1\4 його висоти чи висоти вікна браузера, якщо елемент більший за висоту вікна браузера йому добавляється клас .active, якщо ми не докрутили або перекрутили, то клас видаляється
   var animOnScroll = function animOnScroll() {
     for (var index = 0; index < animItems.length; index++) {
       var animItem = animItems[index];
       var animItemHeight = animItem.offsetHeight;
       var animItemOffset = offset(animItem).top;
-      var animStart = 4; //! Змінна для визначення точки старту анімації
-
+      var animStart = 4;
       var animItemPoint = window.innerHeight - animItemHeight / animStart;
 
       if (animItemHeight > window.innerHeight) {
@@ -114,7 +112,6 @@ if (animItems.length > 0) {
         animItem.classList.add('_active');
       } else {
         if (!animItem.classList.contains('_anim-no-hide')) {
-          //! клас призначений для заборони повторного виклику анімації
           animItem.classList.remove('_active');
         }
       }
