@@ -284,14 +284,14 @@ var mouse_parallax = function mouse_parallax(container, up, down) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./basic/ibg */ "./src/js/basic/ibg.js");
-/* harmony import */ var _modules_changeImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImage */ "./src/js/modules/changeImage.js");
-/* harmony import */ var _basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basic/mouse-parallax */ "./src/js/basic/mouse-parallax.js");
-/* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basic/anim-sroll */ "./src/js/basic/anim-sroll.js");
-/* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basic_anim_sroll__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _basic_checkTextInputs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./basic/checkTextInputs */ "./src/js/basic/checkTextInputs.js");
+/* harmony import */ var _modules_changeImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/changeImage */ "./src/js/modules/changeImage.js");
+/* harmony import */ var _basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./basic/mouse-parallax */ "./src/js/basic/mouse-parallax.js");
+/* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basic/anim-sroll */ "./src/js/basic/anim-sroll.js");
+/* harmony import */ var _basic_anim_sroll__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_basic_anim_sroll__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _basic_checkTextInputs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./basic/checkTextInputs */ "./src/js/basic/checkTextInputs.js");
+/* harmony import */ var _basic_ibg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./basic/ibg */ "./src/js/basic/ibg.js");
 
 
 
@@ -413,13 +413,13 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   mainSlider.init();
-  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-2', '.second-up', '.second-down');
-  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-3', '.third-up', '.third-down');
-  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_2__["default"])('.parallax-1', '.first-up', '.first-down');
-  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])('.main-btn', '.overlay', '#preregister');
-  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])('.sub-button', '.overlay', '#register');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_5__["default"])('.modal__forms');
-  Object(_basic_checkTextInputs__WEBPACK_IMPORTED_MODULE_6__["default"])('[type="text"]');
+  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_1__["default"])('.parallax-2', '.second-up', '.second-down');
+  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_1__["default"])('.parallax-3', '.third-up', '.third-down');
+  Object(_basic_mouse_parallax__WEBPACK_IMPORTED_MODULE_1__["default"])('.parallax-1', '.first-up', '.first-down');
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_3__["default"])('.main-btn', '.overlay', '#preregister');
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_3__["default"])('.sub-button', '.overlay', '#register');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])('.modal__forms');
+  Object(_basic_checkTextInputs__WEBPACK_IMPORTED_MODULE_5__["default"])('[type="text"]');
 });
 
 /***/ }),
@@ -485,11 +485,16 @@ function removeIsMobile(imageContainers) {
 }
 
 function createImage(i) {
+  var picture = document.createElement('picture');
+  var source = document.createElement('source');
+  source.setAttribute('srcset', "img/".concat(i + 1, ".webp"));
   var img = document.createElement('img');
   img.getAttribute('alt', 'model');
   img.classList.add('info-section__image');
   img.setAttribute('src', "img/".concat(i + 1, ".png"));
-  return img;
+  picture.appendChild(source);
+  picture.appendChild(img);
+  return picture;
 }
 
 /***/ }),
